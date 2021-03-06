@@ -1,3 +1,4 @@
+import { memo } from "react";
 import {
     createStyles,
     makeStyles,
@@ -66,9 +67,7 @@ const useStyles = makeStyles((theme) =>
     }),
 );
 
-export default function ChatMessageListItem({
-    message,
-}: ChatMessageListItemProps) {
+function ChatMessageListItem({ message }: ChatMessageListItemProps) {
     const styles = useStyles();
 
     return (
@@ -92,3 +91,11 @@ export default function ChatMessageListItem({
         </Box>
     );
 }
+
+export default memo(
+    ChatMessageListItem,
+    ({ message: messageA }, { message: messageB }) =>
+        messageA.content === messageB.content &&
+        messageA.createdAt?.seconds === messageB.createdAt?.seconds &&
+        messageA.photoURL === messageB.photoURL,
+);
