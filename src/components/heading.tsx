@@ -6,7 +6,7 @@ type HeadingProps = {
 
 export default function Heading({ children, ...props }: HeadingProps) {
     return (
-        <Typography variant="h1" {...props}>
+        <Typography color="textPrimary" variant="h1" {...props}>
             {children}
         </Typography>
     );

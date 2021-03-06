@@ -46,6 +46,7 @@ export default function ChatRoom() {
                 alignItems="stretch"
                 gridGap="16px"
                 padding={4}
+                paddingTop={0}
             >
                 <ChatMessagesList messages={messages} />
                 <ChatInput sendMessage={sendMessage} />

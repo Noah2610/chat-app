@@ -1,4 +1,5 @@
 import { Avatar, AvatarProps } from "@material-ui/core";
+import { AccountCircle } from "@material-ui/icons";
 import { getNameInitials } from "../util";
 
 export type UserAvatarProps = {
@@ -16,8 +17,9 @@ export default function UserAvatar({
     return (
         <Avatar src={src || undefined} {...props}>
             {(!!name && getNameInitials(name)) ||
-                (!!email && getNameInitials(email, { isEmail: true })) ||
-                ""}
+                (!!email && getNameInitials(email, { isEmail: true })) || (
+                    <AccountCircle />
+                )}
         </Avatar>
     );
 }

@@ -1,4 +1,4 @@
-import { Box, Button, CircularProgress } from "@material-ui/core";
+import { Box, Button, CircularProgress, IconButton } from "@material-ui/core";
 import firebase from "firebase/app";
 import { useAuthState } from "react-firebase-hooks/auth";
 import UserAvatar from "./user-avatar";
@@ -26,20 +26,22 @@ export default function Login() {
                     {!user ? (
                         <Button
                             variant="contained"
-                            color="primary"
+                            color="secondary"
                             onClick={signInWithGoogle}
                         >
                             Login
                         </Button>
                     ) : (
-                        <>
-                            <UserAvatar
-                                variant="rounded"
-                                src={user.photoURL}
-                                name={user.displayName}
-                                email={user.email}
-                            />
-                        </>
+                        <IconButton>
+                            <Box borderRadius={4} boxShadow={4}>
+                                <UserAvatar
+                                    variant="rounded"
+                                    src={user.photoURL}
+                                    name={user.displayName}
+                                    email={user.email}
+                                />
+                            </Box>
+                        </IconButton>
                     )}
                 </>
             )}
