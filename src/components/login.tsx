@@ -1,6 +1,7 @@
-import { Avatar, Box, Button, CircularProgress } from "@material-ui/core";
+import { Box, Button, CircularProgress } from "@material-ui/core";
 import firebase from "firebase/app";
 import { useAuthState } from "react-firebase-hooks/auth";
+import UserAvatar from "./user-avatar";
 import { auth } from "../firebase";
 
 export default function Login() {
@@ -15,39 +16,32 @@ export default function Login() {
     };
 
     return (
-        <>
-            <Box position="absolute" top={0} right={0} margin="8px">
-                {isLoading ? (
-                    <>
-                        <CircularProgress />
-                    </>
-                ) : (
-                    <>
-                        {!user ? (
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={signInWithGoogle}
-                            >
-                                Login
-                            </Button>
-                        ) : (
-                            <>
-                                <Avatar src={user.photoURL || ""}>
-                                    {user.displayName}
-                                </Avatar>
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={logout}
-                                >
-                                    Logout
-                                </Button>
-                            </>
-                        )}
-                    </>
-                )}
-            </Box>
-        </>
+        <Box>
+            {isLoading ? (
+                <>
+                    <CircularProgress />
+                </>
+            ) : (
+                <>
+                    {!user ? (
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={signInWithGoogle}
+                        >
+                            Login
+                        </Button>
+                    ) : (
+                        <>
+                            <UserAvatar
+                                variant="rounded"
+                                name={user.displayName}
+                                email={user.email}
+                            />
+                        </>
+                    )}
+                </>
+            )}
+        </Box>
     );
 }

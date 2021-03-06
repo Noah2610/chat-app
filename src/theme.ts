@@ -35,7 +35,7 @@ export default createMuiTheme({
             fontSize: "64px",
             letterSpacing: "6px",
             wordSpacing: "12px",
-            marginBottom: "16px",
+            margin: "16px",
             textShadow: "3px 3px 6px #000000",
         },
         h2: {
