@@ -18,5 +18,31 @@ export default createMuiTheme({
     },
     typography: {
         fontFamily: "Roboto",
+
+        body1: {
+            fontSize: "18px",
+        },
+
+        h1: {
+            fontSize: "64px",
+            letterSpacing: "6px",
+            wordSpacing: "12px",
+            marginBottom: "16px",
+        },
+        h2: {
+            fontSize: "48px",
+        },
+        h3: {
+            fontSize: "32px",
+        },
+        h4: {
+            fontSize: "24px",
+        },
+        h5: {
+            fontSize: "20px",
+        },
+        h6: {
+            fontSize: "18px",
+        },
     },
 });

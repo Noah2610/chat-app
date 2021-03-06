@@ -1,3 +1,12 @@
+import { Box } from "@material-ui/core";
+import App from "../components/app";
+
 export default function Home() {
-    return <>Hello World!</>;
+    return (
+        <>
+            <Box maxWidth="640px" marginX="auto" marginTop="64px">
+                <App />
+            </Box>
+        </>
+    );
 }
