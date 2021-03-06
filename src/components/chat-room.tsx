@@ -1,14 +1,9 @@
 import { useState } from "react";
-import {
-    Box,
-    TextField,
-    Typography,
-    FormControl,
-    InputLabel,
-} from "@material-ui/core";
+import { Box, TextField, Typography, FormControl } from "@material-ui/core";
 import firebase from "firebase/app";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import ChatMessage from "./chat-message";
 import { auth, firestore } from "../firebase";
 
 export default function ChatRoom() {
@@ -52,9 +47,7 @@ export default function ChatRoom() {
                     gridGap="16px"
                 >
                     {messages.map((message) => (
-                        <Typography key={message.id}>
-                            {message.content}
-                        </Typography>
+                        <ChatMessage key={message.id} message={message} />
                     ))}
                 </Box>
             )}
