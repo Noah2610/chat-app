@@ -2,3 +2,4 @@
 /.next/
 /.vercel/
 _ignore/
+/.env*
