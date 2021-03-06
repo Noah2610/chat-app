@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 
 export type { default as Message } from "./message";
+export type { default as ActiveUser } from "./active-user";
 export type Id = string;
 export type Ref = any;
 export type Uid = string;
