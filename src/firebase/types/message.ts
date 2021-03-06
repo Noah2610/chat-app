@@ -1,9 +1,9 @@
-import { DocumentData, ServerTimestamp, Uid } from "../types";
+import { DocumentData, Timestamp, Uid } from "../types";
 
 type Message =
     | {
           content: string;
-          createdAt: ServerTimestamp;
+          createdAt: Timestamp;
           uid: Uid;
           photoURL: string | null;
       }

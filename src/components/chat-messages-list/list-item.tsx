@@ -9,6 +9,7 @@ import {
     Typography,
 } from "@material-ui/core";
 import { Message } from "../../firebase/types";
+import { formatTimestamp } from "../../util";
 
 export type ChatMessageListItemProps = {
     message: Message;
@@ -61,8 +62,13 @@ export default function ChatMessageListItem({
             </ListItemAvatar>
             <Paper className={styles.message} elevation={2}>
                 <Box className={styles.arrow} />
-                <Box padding={2}>
+                <Box padding={2} paddingBottom={1}>
                     <Typography>{message.content}</Typography>
+                    <Box marginTop={1}>
+                        <Typography variant="caption" color="textSecondary">
+                            {formatTimestamp(message.createdAt)}
+                        </Typography>
+                    </Box>
                 </Box>
             </Paper>
         </ListItem>
