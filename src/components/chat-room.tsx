@@ -1,14 +1,13 @@
-import { useState } from "react";
-import { Box, TextField, FormControl } from "@material-ui/core";
+import { Box } from "@material-ui/core";
 import firebase from "firebase/app";
 import { useAuthState } from "react-firebase-hooks/auth";
 import ChatMessage from "./chat-message";
+import ChatInput from "./chat-input";
 import { auth } from "../firebase";
 import { useMessages, getMessagesCollection } from "../firebase/api";
 
 export default function ChatRoom() {
     const [user] = useAuthState(auth);
-    const [message, setMessage] = useState("");
 
     const messagesCollection = getMessagesCollection();
     const { messages, isLoading, error } = useMessages(
@@ -20,8 +19,7 @@ export default function ChatRoom() {
         return null;
     }
 
-    const sendMessage = async () => {
-        setMessage("");
+    const sendMessage = async (message: string) => {
         await messagesCollection.add({
             content: message,
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
@@ -53,22 +51,7 @@ export default function ChatRoom() {
             )}
 
             <Box>
-                <form
-                    action="#"
-                    onSubmit={(e) => {
-                        e.preventDefault();
-                        sendMessage();
-                    }}
-                >
-                    <FormControl>
-                        <TextField
-                            value={message}
-                            label="Message"
-                            variant="filled"
-                            onChange={(e) => setMessage(e.currentTarget.value)}
-                        ></TextField>
-                    </FormControl>
-                </form>
+                <ChatInput sendMessage={sendMessage} />
             </Box>
         </Box>
     );
