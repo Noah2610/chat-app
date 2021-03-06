@@ -10,7 +10,7 @@ import {
 } from "../types";
 
 export function getMessagesCollection(): CollectionReference<Message> {
-    return firestore.collection("messages");
+    return firestore.collection("messages") as CollectionReference<Message>;
 }
 
 export type UseMessagesData = {

@@ -1,12 +1,10 @@
-import { DocumentData, Timestamp, Uid } from "../types";
+import { Timestamp, Uid } from "../types";
 
-type Message =
-    | {
-          content: string;
-          createdAt: Timestamp;
-          uid: Uid;
-          photoURL: string | null;
-      }
-    | DocumentData;
+type Message = {
+    content: string;
+    createdAt: Timestamp;
+    uid: Uid;
+    photoURL: string | null;
+};
 
 export default Message;

@@ -1,6 +1,10 @@
 import { Timestamp } from "../firebase/types";
 
 export function formatTimestamp(timestamp: Timestamp): string {
+    if (!timestamp) {
+        return "--:--:--";
+    }
+
     const today = new Date();
     const dateInst = new Date(timestamp.seconds * 1000);
     const date = {

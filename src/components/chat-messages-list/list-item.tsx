@@ -3,8 +3,6 @@ import {
     makeStyles,
     Avatar,
     Box,
-    ListItem,
-    ListItemAvatar,
     Paper,
     Typography,
 } from "@material-ui/core";
@@ -21,13 +19,18 @@ const ARROW_SIZE = 16;
 const useStyles = makeStyles((theme) =>
     createStyles({
         root: {
+            display: "flex",
+            justifyContent: "flex-start",
             alignItems: "flex-end",
+            gap: ARROW_SIZE / 2,
         },
 
         avatar: {
+            width: AVATAR_HEIGHT,
             height: AVATAR_HEIGHT,
             display: "flex",
             alignItems: "center",
+            flexShrink: 0,
         },
 
         message: {
@@ -56,10 +59,10 @@ export default function ChatMessageListItem({
     const styles = useStyles();
 
     return (
-        <ListItem className={styles.root}>
-            <ListItemAvatar className={styles.avatar}>
+        <Box className={styles.root}>
+            <Box className={styles.avatar}>
                 {message.photoURL ? <Avatar src={message.photoURL} /> : <></>}
-            </ListItemAvatar>
+            </Box>
             <Paper className={styles.message} elevation={2}>
                 <Box className={styles.arrow} />
                 <Box padding={2} paddingBottom={1}>
@@ -71,6 +74,6 @@ export default function ChatMessageListItem({
                     </Box>
                 </Box>
             </Paper>
-        </ListItem>
+        </Box>
     );
 }
