@@ -1,5 +1,5 @@
 import { Avatar, Box, Typography } from "@material-ui/core";
-import { Message } from "../firebase/documents";
+import { Message } from "../firebase/types";
 
 export type ChatMessageProps = {
     message: Message;

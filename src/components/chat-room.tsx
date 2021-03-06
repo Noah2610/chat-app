@@ -2,23 +2,19 @@ import { useState } from "react";
 import { Box, TextField, FormControl } from "@material-ui/core";
 import firebase from "firebase/app";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useCollectionData } from "react-firebase-hooks/firestore";
 import ChatMessage from "./chat-message";
-import { auth, firestore } from "../firebase";
-import { CollectionReference, Message } from "../firebase/types";
+import { auth } from "../firebase";
+import { useMessages, getMessagesCollection } from "../firebase/api";
 
 export default function ChatRoom() {
     const [user] = useAuthState(auth);
     const [message, setMessage] = useState("");
 
-    const messagesRef: CollectionReference<Message> = firestore.collection(
-        "messages",
+    const messagesCollection = getMessagesCollection();
+    const { messages, isLoading, error } = useMessages(
+        messagesCollection,
+        (query) => query.limit(10),
     );
-    const messagesQuery = messagesRef.orderBy("createdAt", "desc").limit(25);
-
-    const [messages] = useCollectionData(messagesQuery, {
-        idField: "id",
-    });
 
     if (!user) {
         return null;
@@ -26,8 +22,7 @@ export default function ChatRoom() {
 
     const sendMessage = async () => {
         setMessage("");
-
-        await messagesRef.add({
+        await messagesCollection.add({
             content: message,
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
             uid: user.uid,
