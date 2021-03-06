@@ -5,7 +5,7 @@ export default createMuiTheme({
     palette: {
         primary: {
             main: blue[500],
-            contrastText: "#cccccc",
+            contrastText: "#ffffff",
         },
         text: {
             primary: "#dddddd",
