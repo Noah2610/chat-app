@@ -1,24 +1,30 @@
 import { memo } from "react";
 import {
-    createStyles,
-    makeStyles,
     Avatar,
     Box,
     Paper,
+    Theme,
     Typography,
+    createStyles,
+    makeStyles,
 } from "@material-ui/core";
 import ReactMarkdown from "react-markdown";
-import { Message } from "../../firebase/types";
+import { Message, Uid } from "../../firebase/types";
 import { formatTimestamp } from "../../util";
 
 export type ChatMessageListItemProps = {
     message: Message;
+    loggedInUid: Uid;
+};
+
+type StylesProps = {
+    isLoggedInUserMessage: boolean;
 };
 
 const AVATAR_HEIGHT = 48;
 const ARROW_SIZE = 16;
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles<Theme, StylesProps>((theme) =>
     createStyles({
         root: {
             display: "flex",
@@ -38,7 +44,10 @@ const useStyles = makeStyles((theme) =>
         message: {
             position: "relative",
             color: theme.palette.text.primary,
-            backgroundColor: theme.palette.primary.dark,
+            backgroundColor: ({ isLoggedInUserMessage }) =>
+                isLoggedInUserMessage
+                    ? theme.palette.primary.dark
+                    : theme.palette.primary.light,
         },
 
         content: {
@@ -59,7 +68,10 @@ const useStyles = makeStyles((theme) =>
             height: ARROW_SIZE,
             bottom: AVATAR_HEIGHT / 2 - ARROW_SIZE / 2,
             left: -(ARROW_SIZE / 2),
-            backgroundColor: theme.palette.primary.dark,
+            backgroundColor: ({ isLoggedInUserMessage }) =>
+                isLoggedInUserMessage
+                    ? theme.palette.primary.dark
+                    : theme.palette.primary.light,
             boxShadow: "inherit",
             transform: "rotate(45deg)",
             clipPath: "polygon(0 0, 100% 100%, 0 100%)",
@@ -67,8 +79,12 @@ const useStyles = makeStyles((theme) =>
     }),
 );
 
-function ChatMessageListItem({ message }: ChatMessageListItemProps) {
-    const styles = useStyles();
+function ChatMessageListItem({
+    message,
+    loggedInUid,
+}: ChatMessageListItemProps) {
+    const isLoggedInUserMessage = loggedInUid === message.uid;
+    const styles = useStyles({ isLoggedInUserMessage });
 
     return (
         <Box className={styles.root}>
@@ -94,8 +110,12 @@ function ChatMessageListItem({ message }: ChatMessageListItemProps) {
 
 export default memo(
     ChatMessageListItem,
-    ({ message: messageA }, { message: messageB }) =>
+    (
+        { message: messageA, loggedInUid: loggedInUidA },
+        { message: messageB, loggedInUid: loggedInUidB },
+    ) =>
         messageA.content === messageB.content &&
         messageA.createdAt?.seconds === messageB.createdAt?.seconds &&
-        messageA.photoURL === messageB.photoURL,
+        messageA.photoURL === messageB.photoURL &&
+        loggedInUidA === loggedInUidB,
 );
