@@ -4,7 +4,7 @@ import App from "../components/app";
 export default function Home() {
     return (
         <>
-            <Box maxWidth="640px" marginX="auto" marginTop="64px">
+            <Box maxWidth="640px" marginX="auto">
                 <App />
             </Box>
         </>
