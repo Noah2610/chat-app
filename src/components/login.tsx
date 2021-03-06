@@ -35,6 +35,7 @@ export default function Login() {
                         <>
                             <UserAvatar
                                 variant="rounded"
+                                src={user.photoURL}
                                 name={user.displayName}
                                 email={user.email}
                             />
