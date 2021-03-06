@@ -1,18 +1,20 @@
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import {
-    DataOptions as UseCollectionDataOptions,
-    Data as UseCollectionData,
-} from "react-firebase-hooks/firestore/dist/firestore/types";
+import { DataOptions as UseCollectionDataOptions } from "react-firebase-hooks/firestore/dist/firestore/types";
 import { Query } from ".";
 import { firestore } from "..";
-import { CollectionReference, FirebaseError, Message } from "../types";
+import {
+    CollectionReference,
+    FirebaseError,
+    Message,
+    WithIdAndRef,
+} from "../types";
 
 export function getMessagesCollection(): CollectionReference<Message> {
     return firestore.collection("messages");
 }
 
 export type UseMessagesData = {
-    messages: UseCollectionData<Message, "id", "ref">[];
+    messages: WithIdAndRef<Message>[];
     isLoading: boolean;
     error?: FirebaseError;
 };
@@ -22,7 +24,9 @@ export function useMessages(
     editQueryFn = (query: Query<Message>) => query,
     options: UseCollectionDataOptions<Message> = {},
 ): UseMessagesData {
-    collection ||= getMessagesCollection();
+    if (!collection) {
+        collection = getMessagesCollection();
+    }
     const query = editQueryFn(
         collection.orderBy("createdAt", "desc").limit(20),
     );

@@ -1,7 +1,7 @@
-import { Box } from "@material-ui/core";
+import { Box, Paper } from "@material-ui/core";
 import firebase from "firebase/app";
 import { useAuthState } from "react-firebase-hooks/auth";
-import ChatMessage from "./chat-message";
+import ChatMessagesList from "./chat-messages-list";
 import ChatInput from "./chat-input";
 import { auth } from "../firebase";
 import { useMessages, getMessagesCollection } from "../firebase/api";
@@ -29,30 +29,18 @@ export default function ChatRoom() {
     };
 
     return (
-        <Box
-            display="flex"
-            flexDirection="column"
-            justifyContent="flex-start"
-            alignItems="flex-start"
-            gridGap="16px"
-        >
-            {!!messages && (
-                <Box
-                    display="flex"
-                    flexDirection="column"
-                    justifyContent="flex-start"
-                    alignItems="flex-start"
-                    gridGap="16px"
-                >
-                    {messages.map((message) => (
-                        <ChatMessage key={message.id} message={message} />
-                    ))}
-                </Box>
-            )}
-
-            <Box>
+        <Paper elevation={8}>
+            <Box
+                display="flex"
+                flexDirection="column"
+                justifyContent="flex-start"
+                alignItems="stretch"
+                gridGap="16px"
+                padding={4}
+            >
+                <ChatMessagesList messages={messages} />
                 <ChatInput sendMessage={sendMessage} />
             </Box>
-        </Box>
+        </Paper>
     );
 }

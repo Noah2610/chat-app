@@ -4,16 +4,24 @@ import { blue } from "@material-ui/core/colors";
 export default createMuiTheme({
     palette: {
         primary: {
-            main: blue[500],
+            main: "#601ea8",
+            light: "#934edb",
+            dark: "#2a0078",
+            contrastText: "#cccccc",
+        },
+        secondary: {
+            main: "#5c9123",
+            light: "#8dc253",
+            dark: "#2b6300",
             contrastText: "#ffffff",
         },
         text: {
-            primary: "#dddddd",
-            secondary: "#aaaaaa",
+            primary: "#ffffff",
+            secondary: "#ffffff",
         },
         background: {
             default: "#282c34",
-            paper: "#282c34",
+            paper: "#353942",
         },
     },
     typography: {
@@ -28,6 +36,7 @@ export default createMuiTheme({
             letterSpacing: "6px",
             wordSpacing: "12px",
             marginBottom: "16px",
+            textShadow: "3px 3px 6px #000000",
         },
         h2: {
             fontSize: "48px",

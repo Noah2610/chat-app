@@ -26,7 +26,7 @@ export default function ChatInput({ sendMessage }: ChatInputProps) {
                     setInput("");
                 }}
             >
-                <FormControl>
+                <FormControl fullWidth>
                     <TextField
                         size="small"
                         value={input}
