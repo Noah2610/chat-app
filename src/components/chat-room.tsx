@@ -25,12 +25,14 @@ export default function ChatRoom() {
     }
 
     const sendMessage = async (message: string) => {
-        await messagesCollection.add({
-            content: message,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp() as Timestamp,
-            uid: user.uid,
-            photoURL: user.photoURL,
-        });
+        if (!message.match(/^\s*$/)) {
+            await messagesCollection.add({
+                content: message,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp() as Timestamp,
+                uid: user.uid,
+                photoURL: user.photoURL,
+            });
+        }
     };
 
     return isLoading ? (
