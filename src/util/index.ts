@@ -23,7 +23,7 @@ export function formatTimestamp(timestamp: Timestamp): string {
     return (
         (isToday
             ? ""
-            : `${pad(date.year)}-${pad(date.month)}${pad(date.day)} `) +
+            : `${pad(date.year)}-${pad(date.month + 1)}-${pad(date.day)} `) +
         `${pad(date.hour)}:${pad(date.minute)}:${pad(date.second)}`
     );
 }
